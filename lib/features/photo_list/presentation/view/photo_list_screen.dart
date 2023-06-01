@@ -4,14 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PhotoListScreen extends StatelessWidget {
-  const PhotoListScreen({Key? key}) : super(key: key);
+  PhotoListScreen({Key? key}) : super(key: key);
+
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Expanded(child: TextField(controller: textEditingController)),
+          IconButton(
+            onPressed: () => context.read<PhotoListCubit>().getPhotoList(text: textEditingController.text),
+            icon: const Icon(Icons.search),
+          ),
+        ],
+      ),
       body: BlocBuilder<PhotoListCubit, PhotoListState>(
         builder: (context, state) {
           switch (state.status) {
+            case PhotoListStatus.initial:
+              return const Center(child: Text('İstediğiniz anahtar kelimeyi girerek arama yapabilirsiniz'));
             case PhotoListStatus.loading:
               return const Center(child: CircularProgressIndicator());
             case PhotoListStatus.success:

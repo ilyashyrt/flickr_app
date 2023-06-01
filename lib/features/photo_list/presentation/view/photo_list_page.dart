@@ -9,8 +9,8 @@ class PhotoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PhotoListCubit()..getPhotoList(text: 'cat'),
-      child: const PhotoListScreen(),
+      create: (context) => PhotoListCubit(),
+      child: PhotoListScreen(),
     );
   }
 }

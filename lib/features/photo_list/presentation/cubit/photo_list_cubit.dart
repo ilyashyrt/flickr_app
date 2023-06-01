@@ -8,12 +8,13 @@ part 'photo_list_state.dart';
 class PhotoListCubit extends Cubit<PhotoListState> {
   PhotoListCubit()
       : super(const PhotoListState(
-          status: PhotoListStatus.loading,
+          status: PhotoListStatus.initial,
         ));
 
   final ApiRepository apiRepository = ApiRepository();
 
   Future<void> getPhotoList({String text = '', int page = 1, int perPage = 50}) async {
+    emit(state.copyWith(status: PhotoListStatus.loading));
     try {
       final photoList = await apiRepository.getPhotoList(text: text, page: page, perPage: perPage);
       if (photoList != null) {

@@ -1,6 +1,6 @@
 part of 'photo_list_cubit.dart';
 
-enum PhotoListStatus { loading, success, failure }
+enum PhotoListStatus { initial ,loading, success, failure }
 
 class PhotoListState extends Equatable {
   const PhotoListState({
