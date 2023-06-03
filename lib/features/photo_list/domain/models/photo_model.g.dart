@@ -8,10 +8,10 @@ part of 'photo_model.dart';
 
 Photo _$PhotoFromJson(Map<String, dynamic> json) => Photo(
       title: json['title'] as String?,
-      urlT: json['url_t'] as String?,
+      url: json['url_m'] as String?,
     );
 
 Map<String, dynamic> _$PhotoToJson(Photo instance) => <String, dynamic>{
       'title': instance.title,
-      'url_t': instance.urlT,
+      'url_m': instance.url,
     };

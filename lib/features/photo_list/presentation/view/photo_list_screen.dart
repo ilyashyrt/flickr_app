@@ -7,10 +7,16 @@ class PhotoListScreen extends StatelessWidget {
   PhotoListScreen({Key? key}) : super(key: key);
 
   final TextEditingController textEditingController = TextEditingController();
+  
+  List<String?> downloadList = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.read<PhotoListCubit>().downloadImages(downloadList),
+        child: const Icon(Icons.download),
+      ),
       appBar: AppBar(
         actions: [
           Expanded(child: TextField(controller: textEditingController)),
@@ -28,7 +34,9 @@ class PhotoListScreen extends StatelessWidget {
             case PhotoListStatus.loading:
               return const Center(child: CircularProgressIndicator());
             case PhotoListStatus.success:
-              return const PhotoListGridView();
+              return PhotoListGridView(
+                downloadList: downloadList,
+              );
             case PhotoListStatus.failure:
               return const Center(
                 child: Text('Bir hata oluştu!'),

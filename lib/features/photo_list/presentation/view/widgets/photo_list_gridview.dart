@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PhotoListGridView extends StatelessWidget {
-  const PhotoListGridView({super.key});
+  const PhotoListGridView({
+    super.key,
+    required this.downloadList,
+  });
+
+  final List<String?> downloadList;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +33,7 @@ class PhotoListGridView extends StatelessWidget {
                 padding: const EdgeInsets.all(7),
                 child: PhotoListItem(
                   index: index,
+                  downloadList: downloadList,
                 ),
               );
             },

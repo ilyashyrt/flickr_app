@@ -7,12 +7,12 @@ part 'photo_model.g.dart';
 class Photo {
   String? title;
 
-  @JsonKey(name: 'url_t')
-  String? urlT;
+  @JsonKey(name: 'url_m')
+  String? url;
 
   Photo({
     this.title,
-    this.urlT,
+    this.url,
   });
 
   factory Photo.fromJson(Map<String, dynamic> json) => _$PhotoFromJson(json);
