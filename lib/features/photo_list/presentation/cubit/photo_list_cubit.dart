@@ -18,14 +18,17 @@ class PhotoListCubit extends Cubit<PhotoListState> {
   final ApiRepository apiRepository;
 
   Future<void> getPhotoList({String text = '', int page = 1, int perPage = 50}) async {
+    List<bool>? checkboxList = [];
     emit(state.copyWith(status: PhotoListStatus.loading));
     try {
       final photoList = await apiRepository.getPhotoList(text: text, page: page, perPage: perPage);
       if (photoList != null) {
+        checkboxList = List.generate(photoList.photos!.photo!.length, (_) => false);
         return emit(
           state.copyWith(
             status: PhotoListStatus.success,
             photoList: photoList,
+            isCheckedList: checkboxList,
           ),
         );
       }
@@ -50,5 +53,11 @@ class PhotoListCubit extends Cubit<PhotoListState> {
         print(error);
       }
     }
+  }
+
+  void toggleCheck({required int index, required bool value}) {
+    var list = state.isCheckedList;
+    list![index] = value;
+    emit(state.copyWith(isCheckedList: list));
   }
 }

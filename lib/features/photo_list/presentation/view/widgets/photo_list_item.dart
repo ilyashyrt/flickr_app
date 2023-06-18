@@ -20,46 +20,50 @@ class _PhotoListItemState extends State<PhotoListItem> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<PhotoListCubit>();
-
     return BlocBuilder<PhotoListCubit, PhotoListState>(
       builder: (context, state) {
-        return Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          elevation: 3,
-          shadowColor: Colors.white,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+        final cubit = context.read<PhotoListCubit>();
+        return InkWell(
+          onTap: () {
+            setState(() {});
+            cubit.toggleCheck(index: widget.index, value: !isChecked);
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Image.network(
-                  state.photoList?.photos?.photo?[widget.index].url ?? '',
-                  width: 130,
-                  height: 130,
-                  fit: BoxFit.fill,
-                  errorBuilder: (_, __, ___) {
-                    return Text('Hata oluştu');
-                  },
-                ),
-                Checkbox(
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value!;
-                    });
-                    if (value == true) {
-                      widget.downloadList.add(state.photoList?.photos?.photo?[widget.index].url);
-                    } else {
-                      widget.downloadList.remove(state.photoList?.photos?.photo?[widget.index].url);
-                    }
-                  },
-                )
-              ],
+            elevation: 3,
+            shadowColor: Colors.white,
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.network(
+                    state.photoList?.photos?.photo?[widget.index].url ?? '',
+                    width: 130,
+                    height: 130,
+                    fit: BoxFit.fill,
+                    errorBuilder: (_, __, ___) {
+                      return Text('Hata oluştu');
+                    },
+                  ),
+                  Checkbox(
+                    value: state.isCheckedList![widget.index],
+                    onChanged: (value) {
+                      setState(() {});
+                      cubit.toggleCheck(index: widget.index, value: value!);
+                      if (value == true) {
+                        widget.downloadList.add(state.photoList?.photos?.photo?[widget.index].url);
+                      } else {
+                        widget.downloadList.remove(state.photoList?.photos?.photo?[widget.index].url);
+                      }
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         );

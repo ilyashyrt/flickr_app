@@ -21,7 +21,10 @@ class PhotoListScreen extends StatelessWidget {
         actions: [
           Expanded(child: TextField(controller: textEditingController)),
           IconButton(
-            onPressed: () => context.read<PhotoListCubit>().getPhotoList(text: textEditingController.text),
+            onPressed: () {
+              downloadList = [];
+              context.read<PhotoListCubit>().getPhotoList(text: textEditingController.text);
+            },
             icon: const Icon(Icons.search),
           ),
         ],
