@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flickr App',
       home: PhotoListPage(),
+      theme: ThemeData(primarySwatch: Colors.red),
     );
   }
 }

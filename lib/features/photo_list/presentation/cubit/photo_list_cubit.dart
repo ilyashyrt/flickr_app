@@ -17,7 +17,7 @@ class PhotoListCubit extends Cubit<PhotoListState> {
 
   final ApiRepository apiRepository;
 
-  Future<void> getPhotoList({String text = '', int page = 1, int perPage = 50}) async {
+  Future<void> getPhotoList({String text = '', int page = 1, int perPage = 500}) async {
     List<bool>? checkboxList = [];
     emit(state.copyWith(status: PhotoListStatus.loading));
     try {

@@ -26,7 +26,7 @@ class _PhotoListItemState extends State<PhotoListItem> {
         return InkWell(
           onTap: () {
             setState(() {});
-            cubit.toggleCheck(index: widget.index, value: !isChecked);
+            cubit.toggleCheck(index: widget.index, value: !state.isCheckedList![widget.index]);
           },
           child: Card(
             shape: RoundedRectangleBorder(

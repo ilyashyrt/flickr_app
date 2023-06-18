@@ -7,7 +7,7 @@ class PhotoListScreen extends StatelessWidget {
   PhotoListScreen({Key? key}) : super(key: key);
 
   final TextEditingController textEditingController = TextEditingController();
-  
+
   List<String?> downloadList = [];
 
   @override
@@ -19,7 +19,32 @@ class PhotoListScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         actions: [
-          Expanded(child: TextField(controller: textEditingController)),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              autocorrect: true,
+              maxLines: 1,
+              minLines: 1,
+              textAlignVertical: TextAlignVertical.top,
+              style: const TextStyle(color: Colors.white, decoration: TextDecoration.none),
+              controller: textEditingController,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 1, color: Colors.white), //<-- SEE HERE
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 1, color: Colors.white), //<-- SEE HERE
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 1, color: Colors.white), //<-- SEE HERE
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+              ),
+            ),
+          )),
           IconButton(
             onPressed: () {
               downloadList = [];
