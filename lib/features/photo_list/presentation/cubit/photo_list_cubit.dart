@@ -39,7 +39,9 @@ class PhotoListCubit extends Cubit<PhotoListState> {
 
     for (var url in downloadList) {
       try {
-        var imageId = await ImageDownloader.downloadImage(url ?? '');
+        var imageId = await ImageDownloader.downloadImage(url ?? '').catchError((error) {
+          print(error);
+        });
         var path = await ImageDownloader.findPath(imageId!);
         files.add(File(path!));
       } catch (error) {
