@@ -58,7 +58,13 @@ class PhotoListScreen extends StatelessWidget {
         builder: (context, state) {
           switch (state.status) {
             case PhotoListStatus.initial:
-              return const Center(child: Text('İstediğiniz anahtar kelimeyi girerek arama yapabilirsiniz'));
+              return const Center(
+                child: Text(
+                  'İstediğiniz anahtar kelimeyi girerek arama yapabilirsiniz.',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  textAlign: TextAlign.center,
+                ),
+              );
             case PhotoListStatus.loading:
               return const Center(child: CircularProgressIndicator());
             case PhotoListStatus.success:
